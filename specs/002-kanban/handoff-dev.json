@@ -1,0 +1,21 @@
+{
+  "from": "developer",
+  "to": "qa",
+  "feature": "002-kanban",
+  "status": "ready",
+  "summary": "實作靜態 Kanban 看板頁面：新增 kanban 型別定義、JSON mock data（4 欄 10 卡片）、KanbanBoard/KanbanColumn/KanbanCard/SearchBar 四個元件，KanbanPage 整合 searchQuery state，接線 /kanban 路由，HomePage 新增導航連結；typecheck/test（8 tests pass）/build 全部通過。",
+  "changed_files": [
+    "src/types/kanban.ts",
+    "src/data/kanban.json",
+    "src/components/kanban/KanbanBoard.tsx",
+    "src/components/kanban/KanbanColumn.tsx",
+    "src/components/kanban/KanbanCard.tsx",
+    "src/components/kanban/KanbanCard.test.tsx",
+    "src/components/kanban/SearchBar.tsx",
+    "src/pages/KanbanPage.tsx",
+    "src/App.tsx",
+    "src/pages/HomePage.tsx",
+    "specs/002-kanban/handoff-dev.json"
+  ],
+  "ac_ref": "specs/002-kanban/tasks.md"
+}

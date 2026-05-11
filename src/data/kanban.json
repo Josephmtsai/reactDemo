@@ -1,0 +1,126 @@
+{
+  "columns": [
+    {
+      "id": "col-todo",
+      "title": "待處理",
+      "status": "todo",
+      "color": "blue",
+      "cards": [
+        {
+          "id": "card-01",
+          "title": "更新需求書",
+          "description": "根據客戶回饋修訂 v2.1 需求文件，補充驗收條件",
+          "tags": ["文件", "需求"],
+          "assignee": "Alice",
+          "priority": "high",
+          "dueDate": "2026-05-15"
+        },
+        {
+          "id": "card-02",
+          "title": "撰寫技術規格",
+          "description": "完成 API 端點設計及資料庫 Schema 初稿",
+          "tags": ["技術", "後端"],
+          "assignee": "Bob",
+          "priority": "medium",
+          "dueDate": "2026-05-20"
+        },
+        {
+          "id": "card-03",
+          "title": "優化建置流程",
+          "description": "評估 Vite 建置快取策略，縮短 CI 時間 30%",
+          "tags": ["DevOps", "效能"],
+          "assignee": "Carol",
+          "priority": "low",
+          "dueDate": "2026-05-30"
+        }
+      ]
+    },
+    {
+      "id": "col-in-progress",
+      "title": "進行中",
+      "status": "in-progress",
+      "color": "yellow",
+      "cards": [
+        {
+          "id": "card-04",
+          "title": "完成需求確認 - ABC 客戶",
+          "description": "與 ABC 公司確認第三期功能需求，整理會議記錄",
+          "tags": ["客戶", "需求"],
+          "assignee": "Alice",
+          "priority": "high",
+          "dueDate": "2026-05-12"
+        },
+        {
+          "id": "card-05",
+          "title": "優化效能問題",
+          "description": "修復首頁渲染瓶頸，目標 LCP < 2.5s",
+          "tags": ["效能", "前端"],
+          "assignee": "David",
+          "priority": "high",
+          "dueDate": "2026-05-14"
+        },
+        {
+          "id": "card-06",
+          "title": "準備技術演示",
+          "description": "製作 Demo 投影片及 live demo 環境，供下週客戶簡報使用",
+          "tags": ["簡報", "Demo"],
+          "assignee": "Eve",
+          "priority": "medium",
+          "dueDate": "2026-05-18"
+        }
+      ]
+    },
+    {
+      "id": "col-in-review",
+      "title": "待確認",
+      "status": "in-review",
+      "color": "purple",
+      "cards": [
+        {
+          "id": "card-07",
+          "title": "第一期回饋整合 - XYZ 公告",
+          "description": "彙整 XYZ 團隊對第一期交付物的回饋，提出改善方案",
+          "tags": ["回饋", "客戶"],
+          "assignee": "Frank",
+          "priority": "medium",
+          "dueDate": "2026-05-13"
+        },
+        {
+          "id": "card-08",
+          "title": "查核回饋 - DEF 業務流程",
+          "description": "核對 DEF 業務流程說明書是否符合最新規範",
+          "tags": ["審查", "合規"],
+          "assignee": "Grace",
+          "priority": "low",
+          "dueDate": "2026-05-16"
+        }
+      ]
+    },
+    {
+      "id": "col-done",
+      "title": "已完成",
+      "status": "done",
+      "color": "green",
+      "cards": [
+        {
+          "id": "card-09",
+          "title": "完成設計原型",
+          "description": "Figma 高保真原型已通過設計評審，交付開發",
+          "tags": ["設計", "UI/UX"],
+          "assignee": "Alice",
+          "priority": "high",
+          "dueDate": "2026-05-08"
+        },
+        {
+          "id": "card-10",
+          "title": "建立 LinkedIn 帳號",
+          "description": "公司官方 LinkedIn 頁面上線，發布第一則貼文",
+          "tags": ["行銷", "社群"],
+          "assignee": "Heidi",
+          "priority": "low",
+          "dueDate": "2026-05-05"
+        }
+      ]
+    }
+  ]
+}

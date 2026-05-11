@@ -1,0 +1,21 @@
+{
+  "from": "sa",
+  "to": "developer",
+  "feature": "002-kanban",
+  "status": "ready",
+  "summary": "實作靜態 Kanban 看板頁面（4 欄 10 卡片），含 client-side 關鍵字搜尋、新增卡片 alert 佔位、HashRouter /kanban 路由接線，資料來自 src/data/kanban.json 靜態 import，共 7 個子任務（T01–T07）。",
+  "artifacts": [
+    "specs/002-kanban/spec.md",
+    "specs/002-kanban/tasks.md"
+  ],
+  "assumptions": [
+    "不實作拖曳功能，欄位結構保留供後續擴充",
+    "新增卡片僅顯示 alert，不實作 Modal 或 Form",
+    "搜尋為即時響應（onChange），不加 debounce，因 mock data 量小",
+    "卡片 tags 使用固定藍色 badge 樣式，不按 tag 內容動態配色",
+    "日期格式直接顯示 ISO 8601 字串（YYYY-MM-DD），不做 i18n 格式化",
+    "HomePage.tsx 僅新增一個 Link 導向 /kanban，不更動現有 Button 展示邏輯",
+    "Column 顏色以 Tailwind 靜態 class 實作（switch/map 對應），禁止動態字串拼接，確保 Tailwind CSS 4 build 時 purge 不漏",
+    "本 spec 範圍不包含後端 API，所有資料為前端靜態 mock"
+  ]
+}

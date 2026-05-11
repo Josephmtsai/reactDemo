@@ -1,0 +1,21 @@
+{
+  "from": "sa",
+  "to": "developer",
+  "feature": "003-style",
+  "status": "ready",
+  "summary": "Kanban 看板視覺優化：KanbanCard priority 改為左側 border-l-4 色條、assignee 改為縮寫頭像圓圈、欄位卡片區加捲動、SearchBar 改為卡片容器含 search icon、Button 強化陰影與 active 縮放、頁面背景改漸層，共 6 個子任務（T01–T06）。",
+  "artifacts": [
+    "specs/003-style/spec.md",
+    "specs/003-style/tasks.md"
+  ],
+  "assumptions": [
+    "全部使用 Tailwind CSS utility class，禁止自訂 CSS 或 style 屬性",
+    "所有顏色 class 必須完整靜態字串，禁止模板字串動態拼接",
+    "KanbanCard priority badge 完全移除，由 border-l-4 取代，相關測試同步更新（T06）",
+    "Button.test.tsx 現有 3 個測試不斷言 class，T04 Button 改版不影響測試",
+    "Assignee 頭像色彩以 charCodeAt(0) % 5 決定，assignee 為空字串時 fallback 為 0",
+    "SearchBar 的 input 去除自身 border，由外層容器統一管理視覺邊框",
+    "HomePage 的前往 Kanban Link 保持使用 <Link> 元件（非 <button>），className 手動對齊 Button primary 強化樣式",
+    "KanbanColumn 的 max-h 使用 calc(100vh-280px) 為預估值，實際高度依頁面結構而定"
+  ]
+}
