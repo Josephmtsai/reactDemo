@@ -12,4 +12,5 @@ export interface ColumnDef {
   status: ColumnStatus
   title: string
   color: 'blue' | 'yellow' | 'purple' | 'green'
+  icon: string
 }

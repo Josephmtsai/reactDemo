@@ -29,7 +29,10 @@ export default function KanbanColumn({ column, cards, onEdit, onDelete }: Kanban
         transition-transform duration-200 ${isOver ? '-translate-y-2' : ''}`}
     >
       <div className={`flex items-center justify-between px-4 py-3 rounded-t-xl ${colors.header}`}>
-        <span className="font-bold text-sm tracking-wide">{column.title}</span>
+        <span className="font-bold text-sm tracking-wide flex items-center gap-1.5">
+          <span>{column.icon}</span>
+          {column.title}
+        </span>
         <span
           className={`min-w-[1.5rem] h-6 flex items-center justify-center text-xs font-bold rounded-full px-2 ${colors.badge}`}
         >

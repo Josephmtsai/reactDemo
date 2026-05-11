@@ -1,0 +1,15 @@
+{
+  "from": "sa",
+  "to": "developer",
+  "feature": "006-status-icons",
+  "status": "ready",
+  "summary": "為四個 Kanban 狀態新增 emoji icon：欄位標題列顯示 icon + 標題，EditCardModal 的狀態下拉選單每個 option 也顯示相同 icon。",
+  "artifacts": [],
+  "assumptions": [
+    "<option> 元素不支援 SVG，欄標題與下拉選單統一使用 emoji 保持視覺一致",
+    "icon 對應：待處理=📋、進行中=⚡、待驗收=🔍、已完成=✅",
+    "ColumnDef interface 加入 icon: string 欄位",
+    "新增 STATUS_ICONS Record<ColumnStatus, string> 常數供 EditCardModal 使用",
+    "不安裝任何 icon library"
+  ]
+}

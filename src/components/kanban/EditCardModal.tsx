@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Button from '@/components/ui/Button'
-import { COLUMNS, STATUS_LABELS } from '@/constants/kanban'
+import { COLUMNS, STATUS_ICONS, STATUS_LABELS } from '@/constants/kanban'
 import type { Card, ColumnStatus } from '@/types/kanban'
 
 interface EditCardModalProps {
@@ -92,7 +92,7 @@ export default function EditCardModal({ card, onSave, onClose }: EditCardModalPr
             >
               {COLUMNS.map((col) => (
                 <option key={col.id} value={col.status}>
-                  {STATUS_LABELS[col.status]}
+                  {STATUS_ICONS[col.status]} {STATUS_LABELS[col.status]}
                 </option>
               ))}
             </select>
