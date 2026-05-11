@@ -1,0 +1,27 @@
+{
+  "from": "developer",
+  "to": "qa",
+  "feature": "004-kanban-full",
+  "status": "ready",
+  "summary": "完整重構 Kanban 看板：Card 精簡為 title/description/status 三欄、@dnd-kit 跨欄拖拉、AddCardForm 必填驗證、EditCardModal 編輯狀態、KanbanPage 作為首頁，共實作 8 個子任務（T01–T08）。",
+  "changed_files": [
+    "src/types/kanban.ts",
+    "src/constants/kanban.ts",
+    "src/data/kanban.json",
+    "src/components/kanban/AddCardForm.tsx",
+    "src/components/kanban/KanbanCard.tsx",
+    "src/components/kanban/KanbanCard.test.tsx",
+    "src/components/kanban/EditCardModal.tsx",
+    "src/components/kanban/KanbanBoard.tsx",
+    "src/components/kanban/KanbanColumn.tsx",
+    "src/pages/KanbanPage.tsx",
+    "src/App.tsx"
+  ],
+  "ac_ref": "specs/004-kanban-full/tasks.md",
+  "verification": {
+    "typecheck": "exit 0",
+    "test": "6 passed (KanbanCard x3 + Button x3)",
+    "lint": "exit 0",
+    "build": "exit 0, 285.03 kB JS bundle"
+  }
+}

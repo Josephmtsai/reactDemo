@@ -1,19 +1,52 @@
 import { useState } from 'react'
-import type { KanbanData } from '@/types/kanban'
-import kanbanJson from '@/data/kanban.json'
-import SearchBar from '@/components/kanban/SearchBar'
+import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
+import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
+import type { Card, ColumnStatus } from '@/types/kanban'
+import { COLUMNS } from '@/constants/kanban'
+import initialCardsJson from '@/data/kanban.json'
+import AddCardForm from '@/components/kanban/AddCardForm'
 import KanbanBoard from '@/components/kanban/KanbanBoard'
+import KanbanCard from '@/components/kanban/KanbanCard'
+import EditCardModal from '@/components/kanban/EditCardModal'
 
-const kanbanData = kanbanJson as KanbanData
+const initialCards = initialCardsJson as Card[]
 
 /**
- * Top-level Kanban page — manages searchQuery state and renders the board.
+ * Top-level Kanban page — manages all card state and drag-and-drop logic.
  */
 export default function KanbanPage() {
-  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [cards, setCards] = useState<Card[]>(initialCards)
+  const [editingCard, setEditingCard] = useState<Card | null>(null)
+  const [activeCard, setActiveCard] = useState<Card | null>(null)
 
-  const handleAdd = () => {
-    alert('新增卡片功能開發中')
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }))
+
+  const addCard = (title: string, description: string) => {
+    const newCard: Card = {
+      id: `card-${Date.now()}`,
+      title,
+      description,
+      status: 'todo' as ColumnStatus,
+    }
+    setCards((prev) => [newCard, ...prev])
+  }
+
+  const updateCard = (updated: Card) => {
+    setCards((prev) => prev.map((c) => (c.id === updated.id ? updated : c)))
+  }
+
+  const handleDragStart = (event: DragStartEvent) => {
+    const found = cards.find((c) => c.id === event.active.id)
+    setActiveCard(found ?? null)
+  }
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event
+    setActiveCard(null)
+    if (!over) return
+    const cardId = active.id as string
+    const newStatus = over.id as ColumnStatus
+    setCards((prev) => prev.map((c) => (c.id === cardId ? { ...c, status: newStatus } : c)))
   }
 
   return (
@@ -23,11 +56,28 @@ export default function KanbanPage() {
           <h1 className="text-3xl font-bold text-slate-800 tracking-tight">
             📋 Kanban 看板管理系統
           </h1>
-          <p className="text-sm text-slate-500">拖曳卡片，輕鬆管理你的任務進度</p>
+          <p className="text-sm text-slate-500">管理你的待辦事項，拖拉卡片更新狀態</p>
         </div>
-        <SearchBar value={searchQuery} onChange={setSearchQuery} onAdd={handleAdd} />
-        <KanbanBoard columns={kanbanData.columns} searchQuery={searchQuery} />
+        <AddCardForm onAdd={addCard} />
+        <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+          <KanbanBoard columns={COLUMNS} cards={cards} onEdit={setEditingCard} />
+          <DragOverlay>
+            {activeCard ? (
+              <KanbanCard card={activeCard} onEdit={() => undefined} isDragOverlay />
+            ) : null}
+          </DragOverlay>
+        </DndContext>
       </div>
+      {editingCard && (
+        <EditCardModal
+          card={editingCard}
+          onSave={(updated) => {
+            updateCard(updated)
+            setEditingCard(null)
+          }}
+          onClose={() => setEditingCard(null)}
+        />
+      )}
     </main>
   )
 }

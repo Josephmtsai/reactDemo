@@ -1,12 +1,14 @@
-import type { Column, Card } from '@/types/kanban'
+import { useDroppable } from '@dnd-kit/core'
+import type { ColumnDef, Card } from '@/types/kanban'
 import KanbanCard from './KanbanCard'
 
 interface KanbanColumnProps {
-  column: Column
-  filteredCards: Card[]
+  column: ColumnDef
+  cards: Card[]
+  onEdit: (card: Card) => void
 }
 
-const colorMap: Record<Column['color'], { header: string; badge: string }> = {
+const colorMap: Record<ColumnDef['color'], { header: string; badge: string }> = {
   blue: { header: 'bg-blue-500 text-white', badge: 'bg-white/20 text-white' },
   yellow: { header: 'bg-yellow-500 text-white', badge: 'bg-white/20 text-white' },
   purple: { header: 'bg-purple-500 text-white', badge: 'bg-white/20 text-white' },
@@ -14,9 +16,10 @@ const colorMap: Record<Column['color'], { header: string; badge: string }> = {
 }
 
 /**
- * Renders a single Kanban column with a colored header, card count badge, and scrollable card list.
+ * Renders a single droppable Kanban column with a colored header and scrollable card list.
  */
-export default function KanbanColumn({ column, filteredCards }: KanbanColumnProps) {
+export default function KanbanColumn({ column, cards, onEdit }: KanbanColumnProps) {
+  const { setNodeRef, isOver } = useDroppable({ id: column.status })
   const colors = colorMap[column.color]
 
   return (
@@ -26,11 +29,15 @@ export default function KanbanColumn({ column, filteredCards }: KanbanColumnProp
         <span
           className={`min-w-[1.5rem] h-6 flex items-center justify-center text-xs font-bold rounded-full px-2 ${colors.badge}`}
         >
-          {filteredCards.length}
+          {cards.length}
         </span>
       </div>
-      <div className="flex flex-col gap-2 p-3 flex-1 overflow-y-auto max-h-[calc(100vh-280px)] min-h-[200px]">
-        {filteredCards.length === 0 ? (
+      <div
+        ref={setNodeRef}
+        className={`flex flex-col gap-2 p-3 flex-1 overflow-y-auto max-h-[calc(100vh-380px)] min-h-[200px] transition-colors
+          ${isOver ? 'ring-2 ring-inset ring-blue-400 bg-blue-50/30' : ''}`}
+      >
+        {cards.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-2 py-10 text-gray-400">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +56,7 @@ export default function KanbanColumn({ column, filteredCards }: KanbanColumnProp
             <p className="text-sm">無符合結果</p>
           </div>
         ) : (
-          filteredCards.map((card) => <KanbanCard key={card.id} card={card} />)
+          cards.map((card) => <KanbanCard key={card.id} card={card} onEdit={onEdit} />)
         )}
       </div>
     </div>

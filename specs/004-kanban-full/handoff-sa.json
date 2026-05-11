@@ -1,0 +1,23 @@
+{
+  "from": "sa",
+  "to": "developer",
+  "feature": "004-kanban-full",
+  "status": "ready",
+  "summary": "依 PDF 需求重構 Kanban：Card 精簡為 title/description/status 三欄、看板作為首頁、AddCardForm 必填驗證、EditCardModal 編輯狀態、@dnd-kit 跨欄拖拉，共 8 個子任務（T01–T08）。",
+  "artifacts": [
+    "specs/004-kanban-full/spec.md",
+    "specs/004-kanban-full/tasks.md"
+  ],
+  "assumptions": [
+    "Card 型別 breaking change：移除 tags/assignee/priority/dueDate，KanbanCard 元件全面重構",
+    "拖拉使用 @dnd-kit/core（不用 react-beautiful-dnd），PointerSensor distance:8 防止點擊誤觸",
+    "DndContext 放在 KanbanPage，不放在 KanbanBoard，讓 DragOverlay 與 handleDragEnd 集中管理",
+    "kanban.json 改為 Card[] 陣列（非 { columns: [] } 物件），import 時用 as Card[] 斷言",
+    "Column 定義從 JSON 移出，改為 src/constants/kanban.ts 的 COLUMNS 靜態常數",
+    "表單驗證使用 React useState，不安裝 react-hook-form 或 zod",
+    "無資料持久化，所有狀態存在 React memory，刷新後回到初始資料",
+    "src/pages/HomePage.tsx 保留原檔不刪除，但 App.tsx 移除其路由",
+    "src/components/kanban/SearchBar.tsx 保留原檔不刪除，但不再被使用（自然成為 dead code）",
+    "欄內卡片排序不實作，只做跨欄移動（over.id 對應 ColumnStatus）"
+  ]
+}
