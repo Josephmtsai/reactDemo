@@ -1,0 +1,22 @@
+{
+  "from": "sa",
+  "to": "developer",
+  "feature": "001-init",
+  "status": "ready",
+  "summary": "初始化 React 19 + TypeScript 5 + Tailwind CSS 4 Demo 專案，含 husky pre-commit 品質閘門（lint-staged + tsc + vitest）、multi-stage Dockerfile（nginx 監聽 $PORT），共 9 個子任務（T01–T09）。",
+  "artifacts": [
+    "specs/001-init/spec.md",
+    "specs/001-init/tasks.md"
+  ],
+  "assumptions": [
+    "使用 Tailwind CSS v4（@tailwindcss/vite plugin，CSS 入口用 @import 'tailwindcss' 而非舊版 @tailwind 指令）",
+    "使用 React 19 + react-router-dom v7，採用傳統 BrowserRouter 模式，不使用 v7 loader-based createBrowserRouter",
+    "ESLint 使用 v9 flat config（eslint.config.ts），不使用舊版 .eslintrc",
+    "Dockerfile 最終 stage 使用 nginx:1.27-alpine，$PORT 透過 /etc/nginx/templates/ envsubst 機制注入",
+    "pre-commit 的 vitest run 執行全量測試（非 staged-only），確保跨檔案型別依賴一致性",
+    "Node.js 版本 20 LTS（Dockerfile Stage 1 使用 node:20-alpine）",
+    "GitHub Actions CI workflow 不在本 spec 範圍，另立 feature",
+    "Railway 部署從 main branch 自動觸發，本 spec 不涉及 Railway 設定步驟",
+    "Windows 開發環境需確認 Git 使用 Git Bash 執行 husky shell script"
+  ]
+}
