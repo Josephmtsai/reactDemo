@@ -1,0 +1,20 @@
+{
+  "from": "developer",
+  "to": "qa",
+  "feature": "005-ux-polish",
+  "status": "ready",
+  "summary": "實作六項 UX 細節優化：(1) 建立 Toast 通知系統（useToast context hook、Toast 元件、Toaster 容器），整合至 App.tsx；(2) index.html title 改為「看板」；(3) KanbanCard 加入 onDelete prop、hover 時右上角顯示 pencil/trash icon button、isDragging 時不套 transform；(4) KanbanColumn 拖曳懸停時整欄 -translate-y-2 上移、卡片區 overflow-hidden、mobile max-h 修正為 max-h-[60vh]；(5) KanbanBoard 加入 onDelete prop 並向下傳遞；(6) KanbanPage 整合 deleteCard、addToast 通知（新增/更新/拖曳完成/已完成）、DragOverlay 旋轉效果 rotate-[5deg] scale-105、main 加 overflow-x-hidden 與 p-4 md:p-6；(7) KanbanCard.test.tsx 新增 onDelete mock 與刪除確認測試。typecheck 與 test 全數通過（7/7 tests）。",
+  "changed_files": [
+    "src/hooks/useToast.tsx",
+    "src/components/ui/Toast.tsx",
+    "src/components/ui/Toaster.tsx",
+    "src/App.tsx",
+    "index.html",
+    "src/components/kanban/KanbanCard.tsx",
+    "src/components/kanban/KanbanColumn.tsx",
+    "src/components/kanban/KanbanBoard.tsx",
+    "src/pages/KanbanPage.tsx",
+    "src/components/kanban/KanbanCard.test.tsx"
+  ],
+  "ac_ref": "specs/005-ux-polish/tasks.md"
+}

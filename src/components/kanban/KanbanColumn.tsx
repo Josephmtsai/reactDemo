@@ -6,6 +6,7 @@ interface KanbanColumnProps {
   column: ColumnDef
   cards: Card[]
   onEdit: (card: Card) => void
+  onDelete: (id: string) => void
 }
 
 const colorMap: Record<ColumnDef['color'], { header: string; badge: string }> = {
@@ -18,12 +19,15 @@ const colorMap: Record<ColumnDef['color'], { header: string; badge: string }> = 
 /**
  * Renders a single droppable Kanban column with a colored header and scrollable card list.
  */
-export default function KanbanColumn({ column, cards, onEdit }: KanbanColumnProps) {
+export default function KanbanColumn({ column, cards, onEdit, onDelete }: KanbanColumnProps) {
   const { setNodeRef, isOver } = useDroppable({ id: column.status })
   const colors = colorMap[column.color]
 
   return (
-    <div className="flex flex-col rounded-xl bg-slate-100/80 shadow-sm border border-slate-200">
+    <div
+      className={`flex flex-col rounded-xl bg-slate-100/80 shadow-sm border border-slate-200
+        transition-transform duration-200 ${isOver ? '-translate-y-2' : ''}`}
+    >
       <div className={`flex items-center justify-between px-4 py-3 rounded-t-xl ${colors.header}`}>
         <span className="font-bold text-sm tracking-wide">{column.title}</span>
         <span
@@ -34,8 +38,8 @@ export default function KanbanColumn({ column, cards, onEdit }: KanbanColumnProp
       </div>
       <div
         ref={setNodeRef}
-        className={`flex flex-col gap-2 p-3 flex-1 overflow-y-auto max-h-[calc(100vh-380px)] min-h-[200px] transition-colors
-          ${isOver ? 'ring-2 ring-inset ring-blue-400 bg-blue-50/30' : ''}`}
+        className={`flex flex-col gap-2 p-3 flex-1 overflow-x-hidden overflow-y-auto max-h-[60vh] md:max-h-[calc(100vh-380px)] min-h-[200px] transition-colors
+          ${isOver ? 'ring-2 ring-blue-400 bg-blue-50/30' : ''}`}
       >
         {cards.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-2 py-10 text-gray-400">
@@ -56,7 +60,9 @@ export default function KanbanColumn({ column, cards, onEdit }: KanbanColumnProp
             <p className="text-sm">無符合結果</p>
           </div>
         ) : (
-          cards.map((card) => <KanbanCard key={card.id} card={card} onEdit={onEdit} />)
+          cards.map((card) => (
+            <KanbanCard key={card.id} card={card} onEdit={onEdit} onDelete={onDelete} />
+          ))
         )}
       </div>
     </div>
