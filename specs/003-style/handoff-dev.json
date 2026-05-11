@@ -1,0 +1,17 @@
+{
+  "from": "developer",
+  "to": "qa",
+  "feature": "003-style",
+  "status": "ready",
+  "summary": "完成 Kanban 看板視覺優化：KanbanCard 改為 border-l-4 priority 色條 + assignee 縮寫頭像圓圈、KanbanColumn 欄位加捲動與新空狀態 SVG、SearchBar 整合成卡片容器含 search icon、Button 強化陰影與 active:scale-95、KanbanPage 與 HomePage 改漸層背景，KanbanCard 測試同步更新。typecheck / test (9 passed) / lint / build 均通過。",
+  "changed_files": [
+    "src/components/kanban/KanbanCard.tsx",
+    "src/components/kanban/KanbanColumn.tsx",
+    "src/components/kanban/SearchBar.tsx",
+    "src/components/kanban/KanbanCard.test.tsx",
+    "src/components/ui/Button.tsx",
+    "src/pages/KanbanPage.tsx",
+    "src/pages/HomePage.tsx"
+  ],
+  "ac_ref": "specs/003-style/tasks.md"
+}
