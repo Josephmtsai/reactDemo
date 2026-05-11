@@ -2,6 +2,8 @@
 
 React 19 + TypeScript 5 + Tailwind CSS 4 全功能 Kanban 看板 Demo，支援拖拉卡片、新增/編輯/刪除、Toast 通知，自動部署至 GitHub Pages。
 
+**Demo**：[https://josephmtsai.github.io/reactDemo/](https://josephmtsai.github.io/reactDemo/)
+
 ---
 
 ## 功能特色
@@ -163,29 +165,30 @@ npm run prepare
 各 Agent 呼叫的 token 消耗，來源為 Claude Code CLI 回傳的 `<usage>` 欄位。
 跨 session 壓縮前的資料以截圖為準；無截圖的 session 標記 N/A。
 
-| Feature          | Agent             | Tool Uses | Total Tokens | Duration |
-| ---------------- | ----------------- | --------: | -----------: | -------- |
-| 001-init         | Developer         |        72 |      ~40,100 | 1h 0m 8s |
-| 001-init         | QA                |        57 |      ~40,800 | 47m 42s  |
-| 002-kanban       | SA                |       N/A |          N/A | —        |
-| 002-kanban       | Developer         |       N/A |          N/A | —        |
-| 002-kanban       | QA                |       N/A |          N/A | —        |
-| 003-style        | SA                |       N/A |          N/A | —        |
-| 003-style        | Developer         |       N/A |          N/A | —        |
-| 003-style        | QA                |       N/A |          N/A | —        |
-| 004-kanban-full  | SA                |       N/A |          N/A | —        |
-| 004-kanban-full  | Developer         |       N/A |          N/A | —        |
-| 004-kanban-full  | QA                |       N/A |          N/A | —        |
-| 005-ux-polish    | SA (inline)       |         — |            — | —        |
-| 005-ux-polish    | Developer         |        41 |       42,568 | ~94m 38s |
-| 005-ux-polish    | QA                |        28 |       35,779 | ~85m 18s |
-| 006-status-icons | SA + Dev (inline) |         — |            — | —        |
+| Feature          | Agent             | Tool Uses¹ | Total Tokens |
+| ---------------- | ----------------- | ---------: | -----------: |
+| 001-init         | Developer         |         72 |      ~40,100 |
+| 001-init         | QA                |         57 |      ~40,800 |
+| 002-kanban       | SA                |        N/A |          N/A |
+| 002-kanban       | Developer         |        N/A |          N/A |
+| 002-kanban       | QA                |        N/A |          N/A |
+| 003-style        | SA                |        N/A |          N/A |
+| 003-style        | Developer         |        N/A |          N/A |
+| 003-style        | QA                |        N/A |          N/A |
+| 004-kanban-full  | SA                |        N/A |          N/A |
+| 004-kanban-full  | Developer         |        N/A |          N/A |
+| 004-kanban-full  | QA                |        N/A |          N/A |
+| 005-ux-polish    | SA (inline)       |          — |            — |
+| 005-ux-polish    | Developer         |         41 |       42,568 |
+| 005-ux-polish    | QA                |         28 |       35,779 |
+| 006-status-icons | SA + Dev (inline) |          — |            — |
 
 > **說明**
 >
-> - `Total Tokens` 為 input + output 合計（含 context 重新載入）
-> - 002–004 及 006 的 agent 數據因前一 session context 壓縮而無法取得
-> - 主對話（Orchestrator）本身的 token 消耗未列入；跨兩個 session 總量估計超過 300k tokens
+> - ¹ `Tool Uses`：該 sub-agent 執行期間呼叫的工具次數（Read、Edit、Bash、Grep 等合計）
+> - `Total Tokens`：sub-agent 單次執行的 input + output token 合計（含 context 載入）
+> - 002–004 及 006 的資料因前一 session context 壓縮而無法取得
+> - 主對話（Orchestrator）本身的 token 消耗未列入，兩個 session 合計估計超過 300k tokens
 > - N/A = 資料不可用；`—` = 未以獨立 sub-agent 執行
 
 ---
