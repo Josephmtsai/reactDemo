@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
+import { DndContext, DragOverlay, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
 import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
 import type { Card, ColumnStatus } from '@/types/kanban'
 import { COLUMNS, STATUS_LABELS } from '@/constants/kanban'
@@ -21,7 +21,10 @@ export default function KanbanPage() {
   const [activeCard, setActiveCard] = useState<Card | null>(null)
   const { addToast } = useToast()
 
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }))
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 250, tolerance: 5 } }),
+  )
 
   const addCard = (title: string, description: string) => {
     const newCard: Card = {

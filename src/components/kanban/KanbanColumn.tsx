@@ -41,7 +41,7 @@ export default function KanbanColumn({ column, cards, onEdit, onDelete }: Kanban
       </div>
       <div
         ref={setNodeRef}
-        className={`flex flex-col gap-2 p-3 flex-1 overflow-x-hidden overflow-y-auto max-h-[60vh] md:max-h-[calc(100vh-380px)] min-h-[200px] transition-colors
+        className={`flex flex-col gap-2 p-3 flex-1 overflow-x-hidden overflow-y-auto max-h-[60vh] md:max-h-[calc(100vh-380px)] min-h-[200px] transition-colors [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]
           ${isOver ? 'ring-2 ring-blue-400 bg-blue-50/30' : ''}`}
       >
         {cards.length === 0 ? (
