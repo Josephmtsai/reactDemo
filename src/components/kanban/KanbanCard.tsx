@@ -23,7 +23,10 @@ export default function KanbanCard({
     data: { card },
   })
 
-  const style = isDragging ? {} : { transform: CSS.Transform.toString(transform) }
+  const style = {
+    transform: isDragging ? undefined : CSS.Transform.toString(transform),
+    touchAction: 'none' as const,
+  }
 
   return (
     <div
